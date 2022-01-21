@@ -1,0 +1,28 @@
+nodes:
+  PartyA:
+    debug: true
+    x500: "C=US, L=Los Angeles, O=PartyA, OU=LLC"
+    users:
+      user1:
+        password: test
+      angelenos:
+        password: password
+        permissions: [ "ALL" ]
+  PartyB:
+    x500: "C=GB, L=London, O=PartyB, OU=INC"
+    users:
+      user1:
+        password: test
+      londoner:
+        password: password
+        permissions: [ "ALL" ]
+  notary:
+    notary: true
+#  PartyC:
+#    x500: "C=US, L=New York, O=PartyC, OU=LLC"
+#    users:
+#      user1:
+#        password: test
+#      newyorker:
+#        password: password
+#        permissions: [ "ALL" ]
