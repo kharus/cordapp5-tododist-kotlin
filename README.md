@@ -18,29 +18,29 @@ Corda 5 re-engineers the test development experience, utilizing Docker for test 
 ./gradlew clean build
 
 #2 Create the cpb file from the compiled cpk files in both contracts and workflows.
-cordapp-builder create --cpk contracts/build/libs/corda5-template-contracts-1.0-SNAPSHOT-cordapp.cpk --cpk workflows/build/libs/corda5-template-workflows-1.0-SNAPSHOT-cordapp.cpk -o template.cpb
+cordapp-builder create --cpk contracts/build/libs/tododist-contracts-1.0-SNAPSHOT-cordapp.cpk --cpk workflows/build/libs/tododist-workflows-1.0-SNAPSHOT-cordapp.cpk -o tododist.cpb
 
 #3 Configure the network.
-corda-cli network config docker-compose template-network
+corda-cli network config docker-compose tododist-network
 
 #4 Create a docker compose yaml file and start the docker containers.
-corda-cli network deploy -n template-network -f c5cordapp-template.yaml | docker-compose -f - up -d
+corda-cli network deploy -n tododist-network -f c5cordapp-tododist.yaml | docker-compose -f - up -d
     .
     . This step will take a few mintues to complete. If you are wondering what is running behind the scene,
     . open a new terminal and run: docker-compose -f docker-compose.yaml logs -f 
     
 #5 Install the cpb file into the network.
-corda-cli package install -n template-network template.cpb
+corda-cli package install -n tododist-network tododist.cpb
 ```
 All the steps are combined into a shell script called run.sh - you can simply call `sh ./run.sh` in your terminal and that will sequentially run steps 1 to 5. 
 
 You can always look at the status of the network with the command: 
 ```
-corda-cli network status -n template-network
+corda-cli network status -n tododist-network
 ```
 You can shut down the test network with the command: 
 ```
-corda-cli network terminate -n template-network -ry
+corda-cli network terminate -n tododist-network -ry
 ```
 So far, your app is successfully running on a Corda 5 test deployment network. 
 
@@ -61,7 +61,7 @@ For this app, the logins are:
 * PartyA - Login: angelenos, password: password
 * PartyB - Login: londoner, password: password
 
-NOTE: This information is in the c5cordapp-template.yaml file. 
+NOTE: This information is in the c5cordapp-tododist.yaml file. 
 
 Let's test if you have successfully logged in by going to the RegisteredFlows:
 

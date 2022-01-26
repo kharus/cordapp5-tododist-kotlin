@@ -21,7 +21,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = 'Corda5-Cordapp-Template'
+rootProject.name = 'tododist-corda5'
 
 include('contracts')
 include('workflows')

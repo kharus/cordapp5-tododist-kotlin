@@ -8,7 +8,7 @@ cordapp {
     targetPlatformVersion 1000
     minimumPlatformVersion 999
     workflow {
-        name "Corda 5 Cordapp Template - Workflows"
+        name "ToDo Cordapp - Workflows"
         versionId 1
         vendor "R3"
     }
@@ -90,5 +90,5 @@ dependencies {
 }
 
 tasks.named('jar', Jar) {
-    archiveBaseName = 'corda5-template-workflows'
+    archiveBaseName = 'tododist-workflows'
 }

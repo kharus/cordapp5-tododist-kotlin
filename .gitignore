@@ -11,3 +11,5 @@
 **/logs/
 corda-nodeinfo/corda-nodeinfo.iml
 *~*
+*.cpb
+*.swp
