@@ -31,5 +31,6 @@ class ToDoContract : Contract {
     // Used to indicate the transaction's intent.
     interface Commands : CommandData {
         class CreateToDo : Commands
+        class AssignToDo : Commands
     }
 }

@@ -81,9 +81,9 @@ In the request body for `startflow` in Swagger, enter:
 {
   "rpcStartFlowRequest": {
     "clientId": "launchpad-2", 
-    "flowName": "net.corda.c5template.flows.TemplateFlow", 
+    "flowName": "com.learncorda.tododist.flows.CreateToDoFlow", 
     "parameters": { 
-      "parametersInJson": "{\"msg\": \"Hello-World\", \"receiver\": \"C=GB, L=London, O=PartyB, OU=INC\"}" 
+      "parametersInJson": "{\"task\": \"Buy Milk\"}" 
     } 
   } 
 }

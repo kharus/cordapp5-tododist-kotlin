@@ -19,6 +19,10 @@ data class ToDoState (
     override val participants: List<AbstractParty> = listOf(assignedBy,assignedTo)
 ) : LinearState, JsonRepresentable{
 
+    fun changeOwner(assignedTo: Party): ToDoState {
+        return ToDoState(assignedBy, assignedTo, taskDescription, linearId)
+    }
+
     fun toDto(): TemplateStateDto {
         return TemplateStateDto(
                 assignedBy.name.toString(),
