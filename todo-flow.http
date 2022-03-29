@@ -1,0 +1,29 @@
+###
+# londoner,  Basic bG9uZG9uZXI6cGFzc3dvcmQ=
+# angelenos, Basic YW5nZWxlbm9zOnBhc3N3b3Jk
+
+# curl -X GET "https://localhost:12116/api/v1/flowstarter/registeredflows" -H  "accept: application/json" -H  "Authorization: Basic bG9uZG9uZXI6cGFzc3dvcmQ="
+GET https://localhost:12116/api/v1/flowstarter/registeredflows
+accept: application/json
+Authorization: Basic bG9uZG9uZXI6cGFzc3dvcmQ=
+
+###
+
+# curl -X POST "https://localhost:12116/api/v1/flowstarter/startflow" -H  "accept: application/json" -H  "Authorization: Basic bG9uZG9uZXI6cGFzc3dvcmQ=" -H  "Content-Type: application/json" -d "{\"rpcStartFlowRequest\":{\"clientId\":\"launchpad-2\",\"flowName\":\"com.learncorda.tododist.flows.CreateToDoFlow\",\"parameters\":{\"parametersInJson\":\"{\\\"task\\\": \\\"Buy Milk\\\"}\"}}}"
+POST https://localhost:12116/api/v1/flowstarter/startflow
+accept: application/json
+Authorization: Basic bG9uZG9uZXI6cGFzc3dvcmQ=
+Content-Type: application/json
+
+{
+  "rpcStartFlowRequest": {
+    "clientId": "launchpad-2",
+    "flowName": "com.learncorda.tododist.flows.CreateToDoFlow",
+    "parameters": {
+      "parametersInJson": "{\"task\": \"Buy Milk\"}"
+    }
+  }
+}
+
+###
+

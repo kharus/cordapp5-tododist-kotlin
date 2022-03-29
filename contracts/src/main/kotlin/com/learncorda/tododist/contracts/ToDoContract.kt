@@ -1,12 +1,10 @@
 package com.learncorda.tododist.contracts
 
-import com.learncorda.tododist.states.ToDoState
 import net.corda.v5.ledger.contracts.CommandData
 import net.corda.v5.ledger.contracts.Contract
 import net.corda.v5.ledger.contracts.requireSingleCommand
 import net.corda.v5.ledger.contracts.requireThat
 import net.corda.v5.ledger.transactions.LedgerTransaction
-import net.corda.v5.ledger.transactions.outputsOfType
 
 class ToDoContract : Contract {
     companion object {
@@ -20,9 +18,10 @@ class ToDoContract : Contract {
     override fun verify(tx: LedgerTransaction) {
         // Verification logic goes here.
         val command = tx.commands.requireSingleCommand<Commands>()
+        println("ToDoContract's verify() method has been called")
         //val output = tx.outputsOfType<ToDoState>().single()
         when (command.value) {
-            is Commands.CreateToDo -> requireThat {
+            is Commands.CreateToDoCommand -> requireThat {
                 "No inputs should be consumed when sending the Hello-World message.".using(tx.inputStates.isEmpty())
             }
         }
@@ -30,7 +29,8 @@ class ToDoContract : Contract {
 
     // Used to indicate the transaction's intent.
     interface Commands : CommandData {
-        class CreateToDo : Commands
-        class AssignToDo : Commands
+        class CreateToDoCommand : Commands
+        class AssignToDoCommand : Commands
+        class MarkCompleteToDoCommand : Commands
     }
 }

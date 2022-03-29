@@ -2,7 +2,6 @@ package com.learncorda.tododist.flows
 
 import com.learncorda.tododist.contracts.ToDoContract
 import com.learncorda.tododist.states.ToDoState
-import net.corda.c5template.contracts.TemplateContract
 import net.corda.systemflows.CollectSignaturesFlow
 import net.corda.systemflows.FinalityFlow
 import net.corda.systemflows.ReceiveFinalityFlow
@@ -64,7 +63,7 @@ class CreateToDoFlow @JsonConstructor constructor(private val params: RpcStartFl
         // Generate an unsigned transaction.
         val ourself = flowIdentity.ourIdentity
         val toDoState = ToDoState(ourself, ourself, task)
-        val txCommand = Command(ToDoContract.Commands.CreateToDo(), listOf(ourself.owningKey))
+        val txCommand = Command(ToDoContract.Commands.CreateToDoCommand(), listOf(ourself.owningKey))
         println("New task $toDoState")
 
         val txBuilder = transactionBuilderFactory.create()
@@ -153,7 +152,7 @@ class AssignToDoInitiator @JsonConstructor constructor(private val params: RpcSt
         // Stage 1.
         // Generate an unsigned transaction.
 
-        val txCommand = Command(ToDoContract.Commands.AssignToDo(), listOf(flowIdentity.ourIdentity.owningKey,recipientParty.owningKey))
+        val txCommand = Command(ToDoContract.Commands.AssignToDoCommand(), listOf(flowIdentity.ourIdentity.owningKey,recipientParty.owningKey))
 
         val txBuilder = transactionBuilderFactory.create()
             .setNotary(notary)
