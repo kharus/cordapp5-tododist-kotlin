@@ -25,5 +25,39 @@ Content-Type: application/json
   }
 }
 
+
 ###
+
+# curl -X GET "https://localhost:12116/api/v1/flowstarter/flowoutcome/4400e215-8d6a-4830-9403-6cc6c9607983" -H  "accept: application/json" -H  "Authorization: Basic bG9uZG9uZXI6cGFzc3dvcmQ="
+GET https://localhost:12116/api/v1/flowstarter/flowoutcome/4400e215-8d6a-4830-9403-6cc6c9607983
+accept: application/json
+Authorization: Basic bG9uZG9uZXI6cGFzc3dvcmQ=
+
+###
+# curl -X GET "https://localhost:12116/api/v1/flowstarter/flowoutcomeforclientid/launchpad-2" -H  "accept: application/json" -H  "Authorization: Basic bG9uZG9uZXI6cGFzc3dvcmQ="
+GET https://localhost:12116/api/v1/flowstarter/flowoutcomeforclientid/launchpad-2
+accept: application/json
+Authorization: Basic bG9uZG9uZXI6cGFzc3dvcmQ=
+
+###
+# curl -X POST "https://localhost:12116/api/v1/flowstarter/startflow" -H  "accept: application/json" -H  "Authorization: Basic bG9uZG9uZXI6cGFzc3dvcmQ=" -H  "Content-Type: application/json" -d "{\"rpcStartFlowRequest\":{\"clientId\":\"launchpad-2\",\"flowName\":\"com.learncorda.tododist.flows.AssignToDoInitiator\",\"parameters\":{\"parametersInJson\":\"{\\\"linearId\\\": \\\"4400e215-8d6a-4830-9403-6cc6c9607983\\\",\\\"assignedTo\\\": \\\"C=GB, L=London, O=PartyB, OU=INC\\\"}\"}}}"
+POST https://localhost:12116/api/v1/flowstarter/startflow
+accept: application/json
+Authorization: Basic bG9uZG9uZXI6cGFzc3dvcmQ=
+Content-Type: application/json
+
+{
+  "rpcStartFlowRequest": {
+    "clientId": "launchpad-2",
+    "flowName": "com.learncorda.tododist.flows.AssignToDoInitiator",
+    "parameters": {
+      "parametersInJson": "{\"linearId\": \"4400e215-8d6a-4830-9403-6cc6c9607983\",\"assignedTo\": \"C=GB,L=London,O=PartyB,OU=INC\"}"
+    }
+  }
+}
+
+###
+
+
+
 

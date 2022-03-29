@@ -13,23 +13,34 @@ This app is a skeleton Corda 5 Cordapp. The app has a TemplateState, a TemplateS
 ## How to run the template
 
 Corda 5 re-engineers the test development experience, utilizing Docker for test deployment. We need to follow a couple of steps to test deploy the app. 
+
+1. Build the projects.
 ```shell
-#1 Build the projects.
 ./gradlew clean build
+```
+2. Create the cpb file from the compiled cpk files in both contracts and workflows.
 
-#2 Create the cpb file from the compiled cpk files in both contracts and workflows.
+```shell
 cordapp-builder create --cpk contracts/build/libs/tododist-contracts-1.0-SNAPSHOT-cordapp.cpk --cpk workflows/build/libs/tododist-workflows-1.0-SNAPSHOT-cordapp.cpk -o tododist.cpb
+```
 
-#3 Configure the network.
+3. Configure the network.
+```shell
 corda-cli network config docker-compose tododist-network
+```
 
-#4 Create a docker compose yaml file and start the docker containers.
+4. Create a docker compose yaml file and start the docker containers.
+```shell
 corda-cli network deploy -n tododist-network -f c5cordapp-tododist.yaml | docker-compose -f - up -d
+```
 
-# This step will take a few mintues to complete. If you are wondering what is running behind the scene,
-# open a new terminal and run: docker-compose -f docker-compose.yaml logs -f 
-    
-#5 Install the cpb file into the network.
+This step will take a few mintues to complete. If you are wondering what is running behind the scene, open a new terminal and run: 
+```shell
+docker-compose -f docker-compose.yaml logs -f 
+```
+
+5. Install the cpb file into the network.
+```shell
 corda-cli package install -n tododist-network tododist.cpb
 ```
 All the steps are combined into a shell script called run.sh - you can simply call `sh ./run.sh` in your terminal and that will sequentially run steps 1 to 5. 
@@ -112,8 +123,25 @@ You should see the following response:
 ```json
 {
   "status": "COMPLETED",
-  "resultJson": "{ \n \"txId\" : \"SHA-256:D2A3CEBB7C8E1FA7F35CBA9D9DA6076521D543235EE2867B047FEE8B893CB2EC\",\n \"outputStates\" : [\"{\\\"msg\\\":\\\"Hello-World\\\",\\\"sender\\\":\\\"OU\\u003dLLC, O\\u003dPartyA, L\\u003dLos Angeles, C\\u003dUS\\\",\\\"receiver\\\":\\\"OU\\u003dINC, O\\u003dPartyB, L\\u003dLondon, C\\u003dGB\\\"}\"], \n \"signatures\": [\"UnYM33YZ0G6//FrYNJh6mAfsm9SWfsD1p/aNHWm0focWg+uxp627fV7iuFpubq/t1ufb8yNo0/Awlcs9/b+tBg==\", \"T/0lOTwVKIRtWydTL2KbF4Q1XPeJaN+NkIv9by5unJ1jLDAJ89rfxTuytc5xQvyLQfPtnHIrtK42jzpFO8osAA==\"]\n}",
+  "resultJson": "{ \n \"txId\" : \"SHA-256:D72F5CDAD49709C9B2CB3762B1DA4F92053484A1781D926AC29F9B90EE95A627\",\n \"outputStates\" : [\"{\\\"assignedBy\\\":\\\"OU\=INC, O\=PartyB, L\=London, C\=GB\\\",\\\"assignedTo\\\":\\\"OU\=INC, O\=PartyB, L\=London, C\=GB\\\",\\\"taskDescription\\\":\\\"Buy Milk\\\"}\"], \n \"signatures\": [\"uQgPNpHO1w53u6JjLhY/K6TduggyLAxTtFnQRKm4LCcsaS/ebpnzN76hm8BYqtsKo2Dtq6eigfeegcQo6UEgAw==\"]\n}",
   "exceptionDigest": null
+}
+```
+
+`resultJson` formatted
+```json
+{
+  "txId": "SHA-256:D72F5CDAD49709C9B2CB3762B1DA4F92053484A1781D926AC29F9B90EE95A627",
+  "outputStates": [
+    {
+      "assignedBy": "OU=INC,O=PartyB,L=London,C=GB",
+      "assignedTo": "OU=INC,O=PartyB,L=London,C=GB",
+      "taskDescription": "Buy Milk"
+    }
+  ],
+  "signatures": [
+    "uQgPNpHO1w53u6JjLhY/K6TduggyLAxTtFnQRKm4LCcsaS/ebpnzN76hm8BYqtsKo2Dtq6eigfeegcQo6UEgAw=="
+  ]
 }
 ```
 The completed status of the flow that both the flow and its carried transaction were successful. 
