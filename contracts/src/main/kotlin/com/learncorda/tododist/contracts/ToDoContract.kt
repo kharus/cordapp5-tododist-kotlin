@@ -1,5 +1,6 @@
 package com.learncorda.tododist.contracts
 
+import com.learncorda.tododist.states.ToDoState
 import net.corda.v5.ledger.contracts.CommandData
 import net.corda.v5.ledger.contracts.Contract
 import net.corda.v5.ledger.contracts.requireSingleCommand
@@ -16,15 +17,25 @@ class ToDoContract : Contract {
     // A transaction is valid if the verify() function of the contract of all the transaction's input and output states
     // does not throw an exception.
     override fun verify(tx: LedgerTransaction) {
-        // Verification logic goes here.
-        val command = tx.commands.requireSingleCommand<Commands>()
-        println("ToDoContract's verify() method has been called")
-        //val output = tx.outputsOfType<ToDoState>().single()
-        when (command.value) {
+        val commandData = tx.commands[0].value
+
+        val toDoOutput = tx.outputsOfType(ToDoState::class.java).single()
+
+        when (commandData) {
             is Commands.CreateToDoCommand -> requireThat {
-                "No inputs should be consumed when sending the Hello-World message.".using(tx.inputStates.isEmpty())
+                println("ToDoContract CreateToDoCommand's verify() method has been called")
+                "Task description should not be blank".using(toDoOutput.taskDescription.isNotBlank())
+                "Task description is too long".using(toDoOutput.taskDescription.length < 25)
+                null
+            }
+            is Commands.AssignToDoCommand -> requireThat {
+                println("ToDoContract AssignToDoCommand's verify() method has been called")
+                val toDoInput = tx.inputsOfType(ToDoState::class.java).single()
+                "Already assigned to party".using(toDoInput.assignedTo != toDoOutput.assignedTo)
+                null
             }
         }
+        tx.commands.requireSingleCommand<Commands>()
     }
 
     // Used to indicate the transaction's intent.
