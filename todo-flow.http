@@ -17,7 +17,7 @@ Content-Type: application/json
 
 {
   "rpcStartFlowRequest": {
-    "clientId": "launchpad-2",
+    "clientId": "launchpad-13",
     "flowName": "com.learncorda.tododist.flows.CreateToDoFlow",
     "parameters": {
       "parametersInJson": "{\"task\": \"Buy Milk\"}"
@@ -28,8 +28,8 @@ Content-Type: application/json
 
 ###
 
-# curl -X GET "https://localhost:12116/api/v1/flowstarter/flowoutcome/4400e215-8d6a-4830-9403-6cc6c9607983" -H  "accept: application/json" -H  "Authorization: Basic bG9uZG9uZXI6cGFzc3dvcmQ="
-GET https://localhost:12116/api/v1/flowstarter/flowoutcome/4400e215-8d6a-4830-9403-6cc6c9607983
+# curl -X GET "https://localhost:12116/api/v1/flowstarter/flowoutcome/bfb7ad71-2386-426d-8569-54a13e87e394" -H  "accept: application/json" -H  "Authorization: Basic bG9uZG9uZXI6cGFzc3dvcmQ="
+GET https://localhost:12116/api/v1/flowstarter/flowoutcome/c31f376c-b243-41b4-9ca0-5df3c9e5bbc1
 accept: application/json
 Authorization: Basic bG9uZG9uZXI6cGFzc3dvcmQ=
 
@@ -48,10 +48,10 @@ Content-Type: application/json
 
 {
   "rpcStartFlowRequest": {
-    "clientId": "launchpad-2",
+    "clientId": "launchpad-15",
     "flowName": "com.learncorda.tododist.flows.AssignToDoInitiator",
     "parameters": {
-      "parametersInJson": "{\"linearId\": \"4400e215-8d6a-4830-9403-6cc6c9607983\",\"assignedTo\": \"C=GB,L=London,O=PartyB,OU=INC\"}"
+      "parametersInJson": "{\"linearId\": \"debf0462-023b-432a-b685-4eba7cb4ea35\",\"assignedTo\": \"C=US, L=Los Angeles, O=PartyA, OU=LLC\"}"
     }
   }
 }
